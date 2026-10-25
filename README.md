@@ -48,7 +48,7 @@ A **Hotfix Register** view filters label `hotfix`.
 ## Getting started
 
 1. One-time environment setup: [deploy/setup/README.md](deploy/setup/README.md)
-2. Export APEX after each approved change: `deploy/export_apex.sh deploy/env/dev_uat.env split`
+2. Export APEX after each approved change into `apex/source/f182/`: [docs/apex-export.md](docs/apex-export.md)
 3. Deploy a release: `deploy/deploy.sh deploy/env/prod.env deploy/releases/<version>.json`
 4. Approval rules while branch protection is unavailable: [docs/release-gate.md](docs/release-gate.md)
 
