@@ -6,8 +6,17 @@ Hands-on simulation of an Oracle APEX + GitHub release process (feature release,
 
 | Environment | APEX workspace | DB schema | Who changes it |
 |---|---|---|---|
-| DEV / UAT (sequential) | `POC_DEV_UAT` | `POC_DEV` | Developers; frozen during UAT |
-| PROD simulation | `POC_PROD` | `POC_PROD` | Release operator only |
+| DEV / UAT (sequential) | `DEVOPS-UAT` | `DEVOPS-UAT` | Developers; frozen during UAT |
+| PROD simulation | `DEVOPS-PROD` | `DEVOPS_PROD` | Release operator only |
+
+## Application
+
+APEX 24.2, app **182 – DevOps** (alias `DEVOPS`), table `PROJECTS`.
+
+| Page | Purpose | Blueprint role |
+|---|---|---|
+| 2 – Projects | Interactive Report on `PROJECTS` | List page (blueprint "Page 10") |
+| 3 – Project Details | Modal form on `PROJECTS` (`P3_ID`, `P3_NAME`) | Form page (blueprint "Page 20"); hotfix scenario makes `P3_NAME` Required in PROD |
 
 Both schemas may live in the same test database. No customer schemas, credentials, data or integrations.
 
@@ -35,6 +44,13 @@ Both schemas may live in the same test database. No customer schemas, credential
 
 Backlog → In Progress → Code Review → Ready for UAT → UAT Testing → UAT Approved → Ready for PROD → Deployed → Done.
 A **Hotfix Register** view filters label `hotfix`.
+
+## Getting started
+
+1. One-time environment setup: [deploy/setup/README.md](deploy/setup/README.md)
+2. Export APEX after each approved change into `apex/source/f182/`: [docs/apex-export.md](docs/apex-export.md)
+3. Deploy a release: `deploy/deploy.sh deploy/env/prod.env deploy/releases/<version>.json`
+4. Approval rules while branch protection is unavailable: [docs/release-gate.md](docs/release-gate.md)
 
 ## Release gate (non-negotiable)
 
