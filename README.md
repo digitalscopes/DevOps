@@ -36,6 +36,13 @@ Both schemas may live in the same test database. No customer schemas, credential
 Backlog → In Progress → Code Review → Ready for UAT → UAT Testing → UAT Approved → Ready for PROD → Deployed → Done.
 A **Hotfix Register** view filters label `hotfix`.
 
+## Getting started
+
+1. One-time environment setup: [deploy/setup/README.md](deploy/setup/README.md)
+2. Export APEX after each approved change: `deploy/export_apex.sh deploy/env/dev_uat.env split`
+3. Deploy a release: `deploy/deploy.sh deploy/env/prod.env deploy/releases/<version>.json`
+4. Approval rules while branch protection is unavailable: [docs/release-gate.md](docs/release-gate.md)
+
 ## Release gate (non-negotiable)
 
 If PROD has any hotfix not included in the approved DEV/UAT candidate, **stop** the full app deploy: reconcile, re-export, re-test, re-approve.

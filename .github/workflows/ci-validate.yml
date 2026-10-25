@@ -39,6 +39,7 @@ jobs:
       - name: No committed env files or obvious secrets
         run: |
           if git ls-files | grep -E '^deploy/env/.*\.env$'; then echo "::error::real env file committed"; exit 1; fi
-          if git grep -nIiE '(password|pwd)\s*=\s*[^<[:space:]]+' -- ':!.github/workflows/*'; then
+          # "=>" is PL/SQL named-parameter syntax, not an assignment
+          if git grep -nIiE '(password|pwd)\s*=\s*[^<>[:space:]]+' -- ':!.github/workflows/*'; then
             echo "::error::possible credential in repo"; exit 1
           fi
