@@ -1,0 +1,28 @@
+{
+  "release_id": "v0.1.0",
+  "source_commit_sha": "8298364ee2f6c5e0218210d65475251d0fe3a339",
+  "source_branch": "feature/5-project-dates",
+  "includes": ["#1 TC-01 baseline", "#3 P3_NAME required", "#5 project start/end dates"],
+  "apex_export": {
+    "file": "apex/release/f182_v0.1.0.zip",
+    "format": "split export ZIP (identical to apex/source/f182 at source_commit_sha)",
+    "sha256": "a62ebd56510511b2bb8cfb51004c4b4774eae85ae4e8fb616b2a6bd630f27ad9",
+    "source_app": "182 @ DEVOPS-UAT",
+    "target_app": "1182 @ DEVOPS-PROD (parsing schema DEVOPS-PROD, Run and Build)"
+  },
+  "expected_prior_db_version": "V000",
+  "db_migrations": [
+    "db/migrations/V001__create_schema_migrations.sql",
+    "db/migrations/V002__baseline_projects.sql",
+    "db/migrations/V003__add_project_dates.sql"
+  ],
+  "uat_decision": {
+    "status": "EXCEPTION",
+    "approved_by": "aHMEDgad0115 (acting Release Manager)",
+    "date": "2026-10-25",
+    "evidence": "Demo exception: PRs #2, #4, #6 not yet reviewed/merged; formal UAT not run. See docs/evidence/v0.1.0/deploy-log.md"
+  },
+  "production_authorization": { "authorized_by": "aHMEDgad0115 (acting Release Manager)", "date": "2026-10-25" },
+  "open_hotfixes_backported": true,
+  "rollback_procedure": "docs/evidence/v0.1.0/deploy-log.md#rollback"
+}

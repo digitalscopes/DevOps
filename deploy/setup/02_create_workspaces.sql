@@ -1,6 +1,6 @@
 -- One-time setup: create the PROD-simulation APEX workspace and the PoC test accounts.
 -- Run as SYS / an APEX instance admin after 01_create_schemas.sql.
--- Workspace 1 = DEVOPS-UAT -> DEVOPS-UAT (exists, app 182),  Workspace 2 = DEVOPS-PROD -> DEVOPS_PROD (created here).
+-- Workspace 1 = DEVOPS-UAT -> DEVOPS-UAT (exists, app 182),  Workspace 2 = DEVOPS-PROD -> DEVOPS-PROD (created here).
 -- Accounts: DEV_A, DEV_B (developers in DEVOPS-UAT), RELEASE_MGR (reviewer/release manager, both workspaces).
 -- Every account must change its password on first login. Skip any account that already exists.
 whenever sqlerror exit failure
@@ -9,7 +9,7 @@ set verify off
 accept init_secret char prompt 'Initial password for the PoC APEX accounts: ' hide
 
 begin
-  apex_instance_admin.add_workspace(p_workspace => 'DEVOPS-PROD', p_primary_schema => 'DEVOPS_PROD');
+  apex_instance_admin.add_workspace(p_workspace => 'DEVOPS-PROD', p_primary_schema => 'DEVOPS-PROD');
   commit;
 end;
 /
@@ -30,7 +30,7 @@ begin
   add_user('DEVOPS-UAT',  'DEV_B',       'DEVOPS-UAT',  'CREATE:DATA_LOADER:EDIT:HELP:MONITOR:SQL');
   add_user('DEVOPS-UAT',  'RELEASE_MGR', 'DEVOPS-UAT',  'ADMIN:CREATE:DATA_LOADER:EDIT:HELP:MONITOR:SQL');
   -- Only the release manager can change the PROD simulation
-  add_user('DEVOPS-PROD', 'RELEASE_MGR', 'DEVOPS_PROD', 'ADMIN:CREATE:DATA_LOADER:EDIT:HELP:MONITOR:SQL');
+  add_user('DEVOPS-PROD', 'RELEASE_MGR', 'DEVOPS-PROD', 'ADMIN:CREATE:DATA_LOADER:EDIT:HELP:MONITOR:SQL');
   commit;
 end;
 /
