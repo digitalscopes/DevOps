@@ -1,0 +1,7 @@
+# Never commit real environment configs or credentials
+deploy/env/*.env
+!deploy/env/*.env.template
+*.log
+!docs/evidence/**/*.log
+.DS_Store
+Thumbs.db

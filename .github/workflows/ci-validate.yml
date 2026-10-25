@@ -1,0 +1,44 @@
+name: CI - validate
+
+# Runs on GitHub-hosted runners with NO database credentials.
+# Production deploy is a separate, manually authorized workflow (added later).
+on:
+  pull_request:
+  push:
+    branches: [main, "release/**", "hotfix/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Required folders exist
+        run: |
+          for d in apex/source apex/release db/migrations db/packages db/verify deploy docs/evidence; do
+            test -d "$d" || { echo "::error::missing $d"; exit 1; }
+          done
+
+      - name: Migration file naming (V###__description.sql) and unique versions
+        run: |
+          bad=$(ls db/migrations | grep -vE '^V[0-9]{3}__[a-z0-9_]+\.sql$' || true)
+          [ -z "$bad" ] || { echo "::error::bad migration names: $bad"; exit 1; }
+          dup=$(ls db/migrations | cut -d_ -f1 | sort | uniq -d)
+          [ -z "$dup" ] || { echo "::error::duplicate versions: $dup"; exit 1; }
+
+      - name: Migrations are forward-only (no edits to existing files on PRs)
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          changed=$(git diff --name-status FETCH_HEAD -- db/migrations | grep -E '^(M|D|R)' || true)
+          [ -z "$changed" ] || { echo "::error::existing migrations modified/deleted:"; echo "$changed"; exit 1; }
+
+      - name: No committed env files or obvious secrets
+        run: |
+          if git ls-files | grep -E '^deploy/env/.*\.env$'; then echo "::error::real env file committed"; exit 1; fi
+          if git grep -nIiE '(password|pwd)\s*=\s*[^<[:space:]]+' -- ':!.github/workflows/*'; then
+            echo "::error::possible credential in repo"; exit 1
+          fi

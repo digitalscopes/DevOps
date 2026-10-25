@@ -1,0 +1,27 @@
+name: Feature
+description: Normal development work (feature/<issue-id>-<slug>)
+title: "[FEAT] "
+labels: ["feature"]
+body:
+  - type: textarea
+    id: scope
+    attributes: { label: Scope and acceptance criteria }
+    validations: { required: true }
+  - type: input
+    id: apex
+    attributes: { label: APEX scope, description: "App ID, page IDs, Dynamic Actions, components" }
+  - type: input
+    id: db
+    attributes: { label: DB scope, description: "Table / column / constraint / package, migration version" }
+  - type: input
+    id: owner
+    attributes: { label: Owner / approver / priority }
+    validations: { required: true }
+  - type: dropdown
+    id: promotion
+    attributes:
+      label: Promotion state
+      options: ["Not started", "DEV applied", "UAT passed", "PROD deployed"]
+  - type: textarea
+    id: evidence
+    attributes: { label: Evidence, description: "PR URL, commit SHA, UAT result, release tag, deploy log" }

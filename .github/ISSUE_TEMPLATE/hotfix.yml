@@ -1,0 +1,33 @@
+name: Hotfix
+description: Emergency PROD correction (HF-###). Must be backported before the next full release.
+title: "HF-###: "
+labels: ["hotfix"]
+body:
+  - type: input
+    id: target
+    attributes: { label: Production page / DB object, description: "e.g. Page 20 / P20_PHONE" }
+    validations: { required: true }
+  - type: textarea
+    id: reason
+    attributes: { label: Reason and risk }
+    validations: { required: true }
+  - type: input
+    id: approver
+    attributes: { label: Approver }
+    validations: { required: true }
+  - type: input
+    id: prod_sha
+    attributes: { label: Current PROD release SHA / tag (before fix) }
+  - type: dropdown
+    id: prod_status
+    attributes:
+      label: Production status
+      options: ["Not deployed", "Deployed / checked"]
+  - type: dropdown
+    id: backport
+    attributes:
+      label: Backport status
+      options: ["Not backported", "Merged and tested"]
+  - type: textarea
+    id: evidence
+    attributes: { label: Evidence, description: "PROD export before/after, deploy time, smoke test, backport PR" }

@@ -1,0 +1,14 @@
+{
+  "release_id": "v0.0.0",
+  "source_commit_sha": "",
+  "apex_export": {
+    "file": "apex/release/f<APP_ID>.sql",
+    "sha256": ""
+  },
+  "expected_prior_db_version": "V000",
+  "db_migrations": [],
+  "uat_decision": { "status": "PENDING", "approved_by": "", "date": "", "evidence": "" },
+  "production_authorization": { "authorized_by": "", "date": "" },
+  "open_hotfixes_backported": false,
+  "rollback_procedure": "docs/evidence/<release>/rollback.md"
+}

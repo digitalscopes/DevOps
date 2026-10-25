@@ -1,0 +1,18 @@
+name: Bug
+description: Defect found in DEV/UAT or PROD_SIM
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes: { label: What happened / expected }
+    validations: { required: true }
+  - type: dropdown
+    id: env
+    attributes: { label: Environment, options: ["DEV/UAT", "PROD_SIM"] }
+  - type: input
+    id: apex
+    attributes: { label: APEX scope }
+  - type: input
+    id: db
+    attributes: { label: DB scope }
