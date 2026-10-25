@@ -6,8 +6,17 @@ Hands-on simulation of an Oracle APEX + GitHub release process (feature release,
 
 | Environment | APEX workspace | DB schema | Who changes it |
 |---|---|---|---|
-| DEV / UAT (sequential) | `POC_DEV_UAT` | `POC_DEV` | Developers; frozen during UAT |
-| PROD simulation | `POC_PROD` | `POC_PROD` | Release operator only |
+| DEV / UAT (sequential) | `DEVOPS-UAT` | `DEVOPS-UAT` | Developers; frozen during UAT |
+| PROD simulation | `DEVOPS-PROD` | `DEVOPS_PROD` | Release operator only |
+
+## Application
+
+APEX 24.2, app **182 – DevOps** (alias `DEVOPS`), table `PROJECTS`.
+
+| Page | Purpose | Blueprint role |
+|---|---|---|
+| 2 – Projects | Interactive Report on `PROJECTS` | List page (blueprint "Page 10") |
+| 3 – Project Details | Modal form on `PROJECTS` (`P3_ID`, `P3_NAME`) | Form page (blueprint "Page 20"); hotfix scenario makes `P3_NAME` Required in PROD |
 
 Both schemas may live in the same test database. No customer schemas, credentials, data or integrations.
 

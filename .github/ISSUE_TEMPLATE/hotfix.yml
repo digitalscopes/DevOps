@@ -5,7 +5,7 @@ labels: ["hotfix"]
 body:
   - type: input
     id: target
-    attributes: { label: Production page / DB object, description: "e.g. Page 20 / P20_PHONE" }
+    attributes: { label: Production page / DB object, description: "e.g. App 182 Page 3 / P3_NAME" }
     validations: { required: true }
   - type: textarea
     id: reason
