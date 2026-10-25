@@ -4,11 +4,19 @@ APEX stores the app in the database, not in files. Every approved change must be
 
 ## Per change
 
-1. Issue → branch `feature/<issue>-<slug>`.
+1. Issue → on the issue page, **Development → Create a branch** named `feature/<issue>-<slug>`
+   (this links the branch to the issue; then `git fetch && git checkout feature/<issue>-<slug>`).
 2. Make the change in Page Designer (workspace `DEVOPS-UAT`, app 182).
 3. Export a **split** export (one of the two ways below) and replace `apex/source/f182/` with it.
 4. `git status` — only the pages / components you changed should show as modified.
 5. `git add` **only your files** (DEV/UAT is shared: the export also contains other developers' unfinished work), commit with `#<issue>`, push, open a PR.
+
+### Linking and closing rules (GitHub)
+
+- `Closes #<issue>` in the PR description links the PR to the issue and closes it on merge **only when the PR targets `main`** (the default branch).
+  A PR stacked on another feature branch must be linked by hand: issue → **Development** → select the PR.
+- Board automation (DevOps project → Workflows): PR linked → *In Progress*; PR merged → *Ready for UAT*;
+  issue closed → *Done*; only moving an item to *Done* closes the issue.
 
 ## Way A — APEX UI (no tools needed)
 
