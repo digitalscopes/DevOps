@@ -7,7 +7,7 @@ Hands-on simulation of an Oracle APEX + GitHub release process (feature release,
 | Environment | APEX workspace | DB schema | Who changes it |
 |---|---|---|---|
 | DEV / UAT (sequential) | `DEVOPS-UAT` | `DEVOPS-UAT` | Developers; frozen during UAT |
-| PROD simulation | `DEVOPS-PROD` | `DEVOPS_PROD` | Release operator only |
+| PROD simulation | `DEVOPS-PROD` | `DEVOPS-PROD` (app 1182) | Release operator only |
 
 ## Application
 
