@@ -2,6 +2,9 @@ prompt --application/comments
 begin
 --   Manifest
 --     APPLICATION COMMENTS: 182
+--     APPLICATION COMMENTS: 182
+--     APPLICATION COMMENTS: 182
+--     APPLICATION COMMENTS: 182
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.11.30'
